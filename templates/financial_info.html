@@ -1,0 +1,88 @@
+{% extends "home.html" %}
+{% block content %}
+
+<section class="section">
+        <div class="container" style="margin-bottom: 25px; margin-top: 10px;">
+        </div>
+    </section>
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-offset-4 is-4">
+					<label for="form">Enter valid ticker below:</label>
+                    <form id="form" method="POST">
+                    	<div class="input-group mb-3">
+  							<div class="input-group-prepend">
+    							<span class="input-group-text" id="ticker">Search</span>
+  							</div>
+  							<input type="text" class="form-control" placeholder="Stock Ticker" aria-label="Stock Ticker" aria-describedby="basic-addon1" name="ticker">
+						</div>
+                    </form>
+
+                    <div class="text-center">
+                    	<h3 style="margin-top: 25px;">{{ data.name }} ({{ data.ticker }})</h3>
+                	</div>
+
+			        <table class="table">
+			  			<thead class="thead-dark">
+						    <tr>
+						      <th scope="col">Financial Info</th>
+						      <th scope="col"></th>
+						    </tr>
+			  			</thead>
+			  			<tbody>
+						    <tr>
+						      <th scope="row">Recent Price</th>
+						      <td>{{ data.price }}</td>
+						    </tr>
+						    <tr>
+						      <th scope="row">Market Cap</th>
+						      <td>{{ data.market_cap }}</td>
+						    </tr>
+						    <tr>
+						      <th scope="row">52-Week High</th>
+						      <td>{{ data.high }}</td>
+						    </tr>
+						    <tr>
+						      <th scope="row">52-Week Low</th>
+						      <td>{{ data.low }}</td>
+						    </tr>
+						    <tr>
+						      <th scope="row">Dividend Yield</th>
+						      <td>{{ data.div_yield }}</td>
+						    </tr>
+			  			</tbody>
+					</table>
+
+						<!-- TradingView Widget BEGIN -->
+						<div class="tradingview-widget-container">
+						  <div id="tradingview_3c904"></div>
+						  <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com/symbols/AMZN/" rel="noopener" target="_blank"><span class="blue-text">{{ data.ticker }} Chart</span></a> by TradingView</div>
+						  <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+						  <script type="text/javascript">
+						  new TradingView.widget(
+						  {
+						  "width": 980,
+						  "height": 610,
+						  "symbol": '{{ data.ticker }}',
+						  "interval": "D",
+						  "timezone": "Etc/UTC",
+						  "theme": "light",
+						  "style": "1",
+						  "locale": "en",
+						  "toolbar_bg": "#f1f3f6",
+						  "enable_publishing": false,
+						  "allow_symbol_change": true,
+						  "container_id": "tradingview_3c904"
+						}
+						  );
+						  </script>
+						</div>
+						<!-- TradingView Widget END -->
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock content %}
